@@ -1,3 +1,5 @@
+import clsx, { ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 
 export async function fetchIMDB() {
@@ -36,3 +38,8 @@ export async function fetchMovieDetails() {
         console.error(error);
     }
 }
+
+
+export function cn(...inputs: ClassValue[]) {
+    return twMerge(clsx(inputs))
+  }
