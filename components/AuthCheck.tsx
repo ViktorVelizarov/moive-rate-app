@@ -9,8 +9,6 @@ import { useSession } from 'next-auth/react'; // this hook allows us to access t
 export default function AuthCheck({ children }: { children: React.ReactNode }) {
   const { data: session, status } = useSession();
 
-  console.log(session, status);
-
   if (status === 'authenticated') {
     return <>{children}</>;
   } else {

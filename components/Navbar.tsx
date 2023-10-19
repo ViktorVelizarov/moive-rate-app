@@ -2,6 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 import { SignInButton, SignOutButton } from './buttons'
 import AuthCheck from './AuthCheck'
+import { BookPlus } from 'lucide-react'; //npm install lucide-react
 
 export default function 
 () {
@@ -15,6 +16,13 @@ export default function
           </Link>
 
           <div className='hidden items-center space-x-4 sm:flex'>
+          <Link
+            href='/'
+            className='flex z-40 font-semibold'>
+            <BookPlus />
+            <span>Watchlist</span>
+          </Link>
+          
           <SignInButton />
 
           <AuthCheck>
