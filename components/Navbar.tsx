@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
+import { SignInButton, SignOutButton } from './buttons'
+import AuthCheck from './AuthCheck'
 
 export default function 
 () {
@@ -11,6 +13,14 @@ export default function
             className='flex z-40 font-semibold'>
             <span>MovieRater</span>
           </Link>
+
+          <div className='hidden items-center space-x-4 sm:flex'>
+          <SignInButton />
+
+          <AuthCheck>
+            <SignOutButton />
+          </AuthCheck>
+          </div>
       </div>
     </nav>
   )
