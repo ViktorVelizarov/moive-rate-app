@@ -18,7 +18,7 @@ export default async function UpcomingMovies() {
     {!isDataEmpty ? (
           <section>
             <div className='flex flex-row gap-3'>
-              {upcomingMovies.results?.map((upcomingMovie: {title: string,poster_path: string, backdrop_path: string; } ) => (
+              {upcomingMovies.results?.slice(0, 6).map((upcomingMovie: {title: string,poster_path: string, backdrop_path: string; } ) => (
                 
                 <UpcomingMovCard title={upcomingMovie.title} poster={upcomingMovie.poster_path}/>
               ))}
