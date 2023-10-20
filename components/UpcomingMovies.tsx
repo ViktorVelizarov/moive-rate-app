@@ -2,6 +2,7 @@
 import { fetchIMDB, fetchMovieDetails }from '@/utils'
 import React from 'react'
 import UpcomingMovCard from './UpcomingMovCard';
+import MaxWidthWrapper from './MaxWidthWrapper';
 
 export default async function UpcomingMovies() {
     const upcomingMovies = await fetchIMDB();
@@ -9,15 +10,17 @@ export default async function UpcomingMovies() {
     const movieDetails = await fetchMovieDetails()
 
     const isDataEmpty = !Array.isArray(upcomingMovies.results) || upcomingMovies.results.length < 1 || !upcomingMovies.results;
-  return (
-    <>
+  return (  
+    <MaxWidthWrapper>
+    <main className='bg-black'>
     <div>UpcomingMovies</div>
 
     {!isDataEmpty ? (
           <section>
-            <div>
-              {upcomingMovies.results?.map((upcomingMovie: {title: string, backdrop_path: string; } ) => (
-                <UpcomingMovCard title={upcomingMovie.title} poster={upcomingMovie.backdrop_path}/>
+            <div className='flex flex-row gap-3'>
+              {upcomingMovies.results?.map((upcomingMovie: {title: string,poster_path: string, backdrop_path: string; } ) => (
+                
+                <UpcomingMovCard title={upcomingMovie.title} poster={upcomingMovie.poster_path}/>
               ))}
             </div>
           </section>
@@ -28,6 +31,7 @@ export default async function UpcomingMovies() {
         )}
 
    
-    </>
+    </main>
+    </MaxWidthWrapper>
   ) 
 }
