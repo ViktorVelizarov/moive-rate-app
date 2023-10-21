@@ -15,7 +15,7 @@ export default async function topRatedMovies() {
   return (  
     <MaxWidthWrapper>
     <main className='bg-black'>
-    <div className='flex flex-row'>
+    <div className='flex flex-row mb-5'>
     <h1 className='text-white font-semibold text-xl'><span className='text-yellowImport'>|</span> Top Rated:</h1>
     <ChevronRight color='white'/>
     </div>
@@ -23,9 +23,9 @@ export default async function topRatedMovies() {
     {!isDataEmpty ? (
           <section>
             <div className='flex flex-row gap-3'>
-              {topRatedMovies.results?.slice(0, 6).map((upcomingMovie: {id: string, title: string,poster_path: string, backdrop_path: string; } ) => (
+              {topRatedMovies.results?.slice(0, 6).map((upcomingMovie: {id: string,  vote_average: number, title: string,poster_path: string, backdrop_path: string; } ) => (
                 
-                <MovieCard title={upcomingMovie.title} poster={upcomingMovie.poster_path} id={upcomingMovie.id}/>
+                <MovieCard title={upcomingMovie.title} poster={upcomingMovie.poster_path} id={upcomingMovie.id} rating={upcomingMovie.vote_average}/>
               ))}
             </div>
           </section>

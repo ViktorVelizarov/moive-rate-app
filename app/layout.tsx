@@ -18,11 +18,13 @@ export default function RootLayout({
 }) {
   return (
     <AuthProvider> 
-    <html lang="en">
+    <html lang="en" className='bg-black'>
       <body className={inter.className}>
-        <Navbar />
-        {children}
-        </body>
+        <div className='bg-black'> 
+          <Navbar />
+          {children}
+        </div>
+      </body>
     </html>
     </AuthProvider>
   )

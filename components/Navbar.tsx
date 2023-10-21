@@ -13,7 +13,7 @@ export default function
      <div className='flex h-14 items-center justify-between border-b'>
       <div className='flex flex-row gap-5'>
       <Link
-            href='/dashboard'
+            href='/'
             className='flex z-40 font-semibold'>
             <span className='text-yellowImport'>MovieRater</span>
           </Link>
