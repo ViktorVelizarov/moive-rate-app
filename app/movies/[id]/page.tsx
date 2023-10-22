@@ -1,5 +1,6 @@
 
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
+import WatchListButton from '@/components/WatchListButton';
 import { Button } from '@/components/ui/button';
 import { prisma } from '@/lib/prisma';
 import { BarChart4, PlusSquare, Star } from 'lucide-react';
@@ -13,6 +14,7 @@ interface Props {
 
 
 export default async function fetchMovieByID({ params }: Props) {
+
     const url = `https://api.themoviedb.org/3/movie/${params.id}?language=en-US`;
     const options = {
     method: 'GET',
@@ -22,36 +24,10 @@ export default async function fetchMovieByID({ params }: Props) {
     }
     };
 
-    const url2 = `https://api.themoviedb.org/3/movie/${params.id}/videos?language=en-US`;
-    const options2 = {
-    method: 'GET',
-    headers: {
-        accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlNDA5OTMyY2FhZTMxYTBiZDYzNTliNjFkNDQ3NDEyZSIsInN1YiI6IjY1MzBlZjE2MzBmNzljMDEzODBlYTg5NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S37uuIacu0SYc6FOkf7_SJYZ3iH1vyasnC46xrSel8o'
-    }
-    }
-
-    const url3 = `https://api.themoviedb.org/3/movie/${params.id}/similar?language=en-US&page=1 `;
-    const options3 = {
-    method: 'GET',
-    headers: {
-        accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlNDA5OTMyY2FhZTMxYTBiZDYzNTliNjFkNDQ3NDEyZSIsInN1YiI6IjY1MzBlZjE2MzBmNzljMDEzODBlYTg5NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S37uuIacu0SYc6FOkf7_SJYZ3iH1vyasnC46xrSel8o'
-    }
-    }
-
     try {
         const response = await fetch(url, options);
         const result = await response.json();
         console.log(result)
-        
-        //const response2 = await fetch(url2, options2);
-        //const videos = await response2.json();
-        //console.log(videos)
-
-        const response3 = await fetch(url3, options3);
-        const credits = await response3.json();
-        console.log(credits)
 
         const hours = Math.floor(result.runtime / 60);
         const minutes = result.runtime % 60;
@@ -107,9 +83,7 @@ export default async function fetchMovieByID({ params }: Props) {
             <div className=''>
             <p className='text-white'>{result.overview}</p>
             </div>
-                <button className='font-semibold rounded-md w-full h-14 bg-yellowImport flex flex-row justify-center items-center'>
-                    <PlusSquare/>Add to Watchlist
-                </button>
+               <WatchListButton movie={params}/> 
             </div>
             </MaxWidthWrapper>
         )
