@@ -1,4 +1,5 @@
 //localhost/api/users
+//just for testing
 
 import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
