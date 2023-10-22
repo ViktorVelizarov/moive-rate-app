@@ -1,4 +1,5 @@
 'use client';
+import { Button } from "@/components/ui/button";
 import React from "react"
 
 export function EditForm({ user }: any) {
@@ -29,24 +30,26 @@ export function EditForm({ user }: any) {
   };
 
   return (
-    <div>
-      <h2>Edit Your Profile</h2>
-      <form onSubmit={updateUser}>
-        <label htmlFor="name">Name</label>
-        <input type="text" name="name" defaultValue={user?.name ?? ''} />
-        <label htmlFor="bio">Bio</label>
-        <textarea
+    <div className="flex flex-col text-white">
+      <h2 className="text-yellowImport font-semibold text-2xl text-center">Edit Your Profile</h2>
+      <form className="flex flex-col" onSubmit={updateUser}>
+        <label className="mt-5" htmlFor="name">Name</label>
+        <input className="text-black" type="text" name="name" defaultValue={user?.name ?? ''} />
+        <label className="mt-5" htmlFor="bio">Bio</label>
+        <textarea className="text-black"
           name="bio"
           cols={30}
           rows={10}
           defaultValue={user?.bio ?? ''}
         ></textarea>
-        <label htmlFor="age">Age</label>
-        <input type="text" name="age" defaultValue={user?.age ?? 0} />
-        <label htmlFor="image">Profile Image URL</label>
-        <input type="text" name="image" defaultValue={user?.image ?? ''} />
-
-        <button type="submit">Save</button>
+        <label className="mt-5" htmlFor="age">Age</label>
+        <input className="text-black" type="text" name="age" defaultValue={user?.age ?? 0} />
+        <label className="mt-5" htmlFor="image">Profile Image URL</label>
+        <input className="text-black" type="text" name="image" defaultValue={user?.image ?? ''} />
+        <Button className="mt-5">
+         <button type="submit">Save</button>
+        </Button>
+       
       </form>
     </div>
   );

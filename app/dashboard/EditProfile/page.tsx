@@ -20,7 +20,6 @@ export default async function EditProfile() {
 
   return (
     <>
-      <h1>Dashboard</h1>
       <EditForm user={user} />
     </>
   );

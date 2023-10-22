@@ -40,21 +40,21 @@ export default function UpcomingMovCard(props: {id: string, rating: number, titl
             <div className='flex flex-row p-3 '>
             <Star color='#facd05' fill='#facd05'/>
             <p className='text-white '> {props.rating.toFixed(1)} </p>
-            <Dialog>
-              <DialogTrigger><Star color='#0c8ff2' /></DialogTrigger>
-              <DialogContent className='bg-slate-700'>
-                <div className='flex flex-col items-center'>
-                <p className='text-yellowImport'> Your rating for:</p>
-                <h1 className='text-white text-2xl font-semibold'>{props.title}</h1>
+              <Dialog>
+                <DialogTrigger><Star color='#0c8ff2' /></DialogTrigger>
+                <DialogContent className='bg-slate-700'>
+                  <div className='flex flex-col items-center'>
+                  <p className='text-yellowImport'> Your rating for:</p>
+                  <h1 className='text-white text-2xl font-semibold'>{props.title}</h1>
 
-                <div className='flex flex-row gap-1 mt-4'>
-                {starArray.map((element, index) => (
-                <div key={index}>{element}</div>))}
-                </div>
-                <Button className='w-64 mt-6'>Rate</Button>
-                </div>
-              </DialogContent>
-            </Dialog>
+                  <div className='flex flex-row gap-1 mt-4'>
+                  {starArray.map((element, index) => (
+                  <div key={index}>{element}</div>))}
+                  </div>
+                  <Button className='w-64 mt-6'>Rate</Button>
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
             <div className=' h-20'>
             <h2 className='text-white text-left ml-3'>{props.title}</h2>

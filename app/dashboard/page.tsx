@@ -6,6 +6,15 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation';
 import React, { use } from 'react'
 import { authOptions } from '../api/auth/[...nextauth]/route';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import EditProfile from './EditProfile/page';
 
 export default async function Page() {
   const session = await getServerSession(authOptions);  //get the current session
@@ -30,11 +39,20 @@ export default async function Page() {
         <p>{user?.email}</p>
       </div>
 
-      <Button className='mt-5'>
-        <Link href="/dashboard/EditProfile">
-          <p>Edit profile</p>
-        </Link>
-      </Button>
+      <Dialog>
+        <DialogTrigger>
+          <Button className='mt-5'>
+              <p>Edit profile</p>
+          </Button>
+        </DialogTrigger>
+
+        <DialogContent className='bg-slate-700'>
+          <div className='flex flex-col items-center'>
+            <EditProfile/>
+          </div>
+        </DialogContent>
+      </Dialog>
+      
     </MaxWidthWrapper>
   </>
   )
