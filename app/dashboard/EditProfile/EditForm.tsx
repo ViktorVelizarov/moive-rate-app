@@ -14,6 +14,7 @@ export function EditForm({ user }: any) {
       bio: formData.get('bio'),
       age: formData.get('age'),
       image: formData.get('image'),
+      id: user.id
     };
 
     const res = await fetch('/api/user', {   //we send the collected info to a api endpoint
