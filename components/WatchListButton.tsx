@@ -1,30 +1,33 @@
-"use client"  //because we handle clicks
+"use client"
 
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import { myAction } from '@/app/serverActions/addToWatch';
-import { prisma } from '@/lib/prisma';
-import { PlusSquare } from 'lucide-react'
-import { getServerSession } from 'next-auth';
-import { redirect } from 'next/navigation';
-import React from 'react'
+import { PlusSquare } from 'lucide-react';
+import React from 'react';
 
 interface Props {
-  movie: {  
-    id: string;
-  };
+  movieName: string; 
 }
-export default function WatchListButton({ movie }: Props) {
 
-  async function addToWatch(){
+export default function WatchListButton({ movieName }: Props ) {
+
+  async function addToWatch() {
+   console.log(movieName)
+    const res = await fetch('/api/wishlist', {   //we send the collected info to a api endpoint
+      method: 'PUT',
+      body: JSON.stringify(movieName),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
     
+    await res.json();
     
-    }
+  }
 
   return (
     <div>
-         <button className='font-semibold rounded-md w-full h-14 bg-yellowImport flex flex-row justify-center items-center' onClick={myAction}>
-                    <PlusSquare/>Add to Watchlist
-         </button>
+      <button className='font-semibold rounded-md w-full h-14 bg-yellowImport flex flex-row justify-center items-center' onClick={addToWatch}>
+        <PlusSquare /> Add to Watchlist
+      </button>
     </div>
-  )
+  );
 }

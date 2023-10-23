@@ -1,10 +1,12 @@
 
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import WatchListButton from '@/components/WatchListButton';
 import { Button } from '@/components/ui/button';
-import { prisma } from '@/lib/prisma';
 import { BarChart4, PlusSquare, Star } from 'lucide-react';
 import { Metadata } from 'next';
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
 
 interface Props {
     params: {
@@ -14,6 +16,8 @@ interface Props {
 
 
 export default async function fetchMovieByID({ params }: Props) {
+
+    const session = await getServerSession(authOptions); 
 
     const url = `https://api.themoviedb.org/3/movie/${params.id}?language=en-US`;
     const options = {
@@ -83,7 +87,7 @@ export default async function fetchMovieByID({ params }: Props) {
             <div className=''>
             <p className='text-white'>{result.overview}</p>
             </div>
-               <WatchListButton movie={params}/> 
+               <WatchListButton movieName={result.title} /> 
             </div>
             </MaxWidthWrapper>
         )
