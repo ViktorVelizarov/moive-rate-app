@@ -15,10 +15,11 @@ export async function PUT(req: Request) {  //When updating a DB we use PUT
     const user = await prisma.user.update({
         where: { 
             email: currentUserEmail,
-            id: "clnyvoajt0000to8ky645ax94"
+            id: "clo2ylwtu0000to0oug9rahd8"
+
         },
         data: {
-            watchList: movieTitle
+            watchList: ["hello"]
           },
     })
 

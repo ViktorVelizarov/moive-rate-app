@@ -86,7 +86,7 @@ export default async function fetchMovieByID({ params }: Props) {
             <div className='flex flex-row justify-between gap-72 mt-6'>
             <div className=''>
             <p className='text-white'>{result.overview}</p>
-            </div>
+            </div>  
                <WatchListButton movieName={result.title} /> 
             </div>
             </MaxWidthWrapper>

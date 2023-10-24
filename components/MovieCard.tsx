@@ -59,8 +59,9 @@ export default function UpcomingMovCard(props: {id: string, rating: number, titl
             <div className=' h-20'>
             <h2 className='text-white text-left ml-3'>{props.title}</h2>
             </div>
-            <Button variant={'link'}><Plus color="#0c8ff2"/><p className='text-blueImport'>Watchlist</p></Button>
-            <Button variant={'link'}><ChevronRightCircle color='white'/><p className='text-white'>Trailer</p></Button>
+            <div className='flex flex-col items-center mb-5'>
+              <button className='flex flex-row items-center bg-slate-700 px-6 py-2 rounded-md hover:bg-slate-600'><Plus color="#0c8ff2"/><p className='text-blueImport'>Watchlist</p></button>
+            </div>
           </div>
       </div>
 

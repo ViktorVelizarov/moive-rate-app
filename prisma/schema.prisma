@@ -50,7 +50,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
 
-  watchList     String?
+  watchList String[] 
 }
 
 model VerificationToken {
