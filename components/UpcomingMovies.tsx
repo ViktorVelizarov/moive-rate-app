@@ -5,6 +5,7 @@ import UpcomingMovCard from './MovieCard';
 import MaxWidthWrapper from './MaxWidthWrapper';
 import MovieCard from './MovieCard';
 import { ChevronRight } from 'lucide-react';
+import UpcomingMoviesDiv from './UpcomingMoviesDiv';
 
 export default async function UpcomingMovies() {
     const upcomingMovies = await fetchPopular();
@@ -12,29 +13,6 @@ export default async function UpcomingMovies() {
 
     const isDataEmpty = !Array.isArray(upcomingMovies.results) || upcomingMovies.results.length < 1 || !upcomingMovies.results;
   return (  
-    <MaxWidthWrapper>
-    <main className='bg-black mt-20'>
-    <div className='flex flex-row mb-5 '>
-    <h1 className='text-white font-semibold text-xl'><span className='text-yellowImport'>|</span> Popular:</h1>
-    <ChevronRight color='white'/>
-    </div>
-    {!isDataEmpty ? (
-          <section>
-            <div className='flex flex-row gap-3'>
-              {upcomingMovies.results?.slice(0, 6).map((upcomingMovie: {id: string, vote_average: number, title: string,poster_path: string, backdrop_path: string; } ) => (
-                
-                <MovieCard title={upcomingMovie.title} poster={upcomingMovie.poster_path} id={upcomingMovie.id} rating={upcomingMovie.vote_average}/>
-              ))}
-            </div>
-          </section>
-        ) : (
-          <div>
-            <h2 className='text-black text-xl font-bold'>Oops, no results</h2>
-          </div>
-        )}
-
-   
-    </main>
-    </MaxWidthWrapper>
+    <UpcomingMoviesDiv isDataEmpty={isDataEmpty} upcomingMovies={upcomingMovies}/>
   ) 
 }
