@@ -9,7 +9,7 @@ interface Result {
 export default function searchResultsList({results} :  any) {
   
   return (
-    <div className="bg-white w-full  flex flex-col rounded-md max-h-36">
+    <div className="bg-white w-full  flex flex-col rounded-md max-h-10      ">
       {results.map((result: { title: string, poster_path: string, release_date: string, id: string}, id: any) => {
         return <SearchResult title={result.title} image={result.poster_path} date={result.release_date} id={result.id} />;
       })}
