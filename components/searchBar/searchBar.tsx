@@ -18,7 +18,7 @@ export default function searchBar({ setResults} : any) {
     
     fetch(url, options)
     .then(res => res.json())
-    .then(json => console.log(json))
+    .then(json => setResults(json))
     .catch(err => console.error('error:' + err));
     };
 
