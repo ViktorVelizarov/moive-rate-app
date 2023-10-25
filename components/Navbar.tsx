@@ -35,7 +35,7 @@ export default function () {
           </Link>
       </div>
 
-      <div className="  w-80 m-auto flex flex-col items-center">
+      <div className="  w-96 h-8 m-auto flex flex-col items-center">
         <SearchBar setResults={setResults} />
         {results && results.length > 0 && <SearchResultsList results={results} />}
       </div>
