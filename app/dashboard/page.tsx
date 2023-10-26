@@ -16,6 +16,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import EditProfile from './EditProfile/page';
+import { ChevronRight } from 'lucide-react';
 
 export default async function Page() {
   const session = await getServerSession(authOptions);  //get the current session
@@ -34,7 +35,7 @@ export default async function Page() {
   return (
   <div className='flex flex-row'>
     <MaxWidthWrapper>
-      <div className='text-white flex flex-row mt-8 gap-5'>
+      <div className='text-white flex flex-row mt-20 gap-5 bg-gray-800 p-6'>
         {user?.image && <img src={user.image} width="200px" height="200px"/>}
           <div className='flex flex-col'>
           <h1>Name: {user?.name}</h1>
@@ -55,6 +56,14 @@ export default async function Page() {
         </Dialog>
         </div>
         </div>
+          <div>
+            <div className='flex flex-row mb-5'>
+            <h1 className='text-white font-semibold text-xl'><span className='text-yellowImport'>|</span> Your Watchlist:</h1>
+            </div>
+            <p>1</p>
+            <p>2</p>
+            <p>3</p>
+          </div>
       </div>
       
     </MaxWidthWrapper>

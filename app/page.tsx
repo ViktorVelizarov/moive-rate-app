@@ -7,8 +7,8 @@ import Image from 'next/image'
 export default function Home() {
   return (
     <div className='bg-black'>
-    <MaxWidthWrapper className='mb-12 mt-28 sm:mt-40 flex flex-col items-center justify-center bg-black'>  
-    <main className="flex min-h-screen flex-col items-center justify-between  bg-black">
+    <MaxWidthWrapper className='mb-12 mt-20 sm:mt-20 flex flex-col items-center justify-center bg-black'>  
+    <main className="flex min-h-screen flex-col items-center justify-between  bg-black ">
     <div className=' w-full '>
       
     <div className='flex flex-row'>
@@ -20,9 +20,8 @@ export default function Home() {
         Give ratings, add to watchlist, look at stats and more...
       </p>
       </div>
-
       <div>
-            <img height="800px" width="800px" src="/MoviePicture.webp" alt="hero" />
+        <img height="800px" width="800px" src="/MoviePicture.webp" alt="hero" />
       </div>
     </div>
 
