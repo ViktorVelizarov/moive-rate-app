@@ -1,3 +1,4 @@
+
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import { Button } from '@/components/ui/button'
 import { prisma } from '@/lib/prisma';
@@ -29,6 +30,7 @@ export default async function Page() {
       email: currentUserEmail,
     },
   });
+
   return (
   <div className='flex flex-row'>
     <MaxWidthWrapper>
@@ -37,6 +39,7 @@ export default async function Page() {
           <div className='flex flex-col'>
           <h1>Name: {user?.name}</h1>
           <p>Bio: {user?.bio}</p>
+          <p>Age: {user?.age}</p>
           <p>Email: {user?.email}</p>
           <div>
           <Dialog>
@@ -47,7 +50,7 @@ export default async function Page() {
           </DialogTrigger>
 
           <DialogContent className='bg-slate-700'>
-              <EditProfile/>
+              <EditProfile />
           </DialogContent>
         </Dialog>
         </div>

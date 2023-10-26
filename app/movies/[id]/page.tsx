@@ -42,7 +42,7 @@ export default async function fetchMovieByID({ params }: Props) {
                 <div className='flex flex-col'>
                     <h1 className='text-5xl font-semibold text-white'>{result.title}</h1>
                     <div className='flex flex-row gap-4 text-gray-500'>
-                        <p>2023</p>
+                        <p>{result.release_date}</p>
                         <p>{result.adult ? "PG-18" : "PG-13"}</p>
                         <p>{`${hours}h${minutes}m`}</p>
                     </div>

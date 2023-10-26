@@ -5,9 +5,6 @@ import React from "react"
 export function EditForm({ user }: any) {
 
   const updateUser = async (e: React.FormEvent<HTMLFormElement>) => {
-    
-    e.preventDefault(); //this line makes it so the page doesnt refresh on form submit
-    
     const formData = new FormData(e.currentTarget);
 
     const body = {        //here we collect the formData submited in the form
