@@ -30,30 +30,31 @@ export default async function Page() {
     },
   });
   return (
-  <>
+  <div className='flex flex-row'>
     <MaxWidthWrapper>
-      <div className='text-white'>
-        <h1 className='mt-5'>{user?.name}</h1>
-        {user?.image && <img className='mt-5' src={user.image} width="200px" height="200px"/>}
-        <p>{user?.bio}</p>
-        <p>{user?.email}</p>
+      <div className='text-white flex flex-row mt-8 gap-5'>
+        {user?.image && <img src={user.image} width="200px" height="200px"/>}
+          <div className='flex flex-col'>
+          <h1>Name: {user?.name}</h1>
+          <p>Bio: {user?.bio}</p>
+          <p>Email: {user?.email}</p>
+          <div>
+          <Dialog>
+          <DialogTrigger>
+            <Button className='mt-5'>
+                <p>Edit profile</p>
+            </Button>
+          </DialogTrigger>
+
+          <DialogContent className='bg-slate-700'>
+              <EditProfile/>
+          </DialogContent>
+        </Dialog>
+        </div>
+        </div>
       </div>
-
-      <Dialog>
-        <DialogTrigger>
-          <Button className='mt-5'>
-              <p>Edit profile</p>
-          </Button>
-        </DialogTrigger>
-
-        <DialogContent className='bg-slate-700'>
-          <div className='flex flex-col items-center'>
-            <EditProfile/>
-          </div>
-        </DialogContent>
-      </Dialog>
       
     </MaxWidthWrapper>
-  </>
+  </div>
   )
 }
