@@ -60,7 +60,7 @@ export default async function Page() {
             <div className='flex flex-row mb-5'>
             <h1 className='text-white font-semibold text-xl'><span className='text-yellowImport'>|</span> Your Watchlist:</h1>
             </div>
-            <p>1</p>
+            <p>{user?.watchList}</p>
             <p>2</p>
             <p>3</p>
           </div>

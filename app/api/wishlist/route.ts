@@ -8,19 +8,20 @@ import { NextResponse } from "next/server";
 
 export async function PUT(req: Request) {  //When updating a DB we use PUT
 
-    const session = await getServerSession(); 
+    const session = await getServerSession(authOptions);
     const currentUserEmail = session?.user?.email!; 
     const movieTitle = await req.json()                                     
-
+    console.log(currentUserEmail)
     const user = await prisma.user.update({
         where: { 
             email: currentUserEmail,
-            id: "clo2ylwtu0000to0oug9rahd8"
 
         },
         data: {
-            watchList: ["hello"]
-          },
+            watchList: {
+              push: movieTitle
+            },
+        }
     })
 
     return NextResponse.json(user) //return the user as json
