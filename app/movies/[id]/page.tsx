@@ -3,6 +3,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import WatchListButton from '@/components/WatchListButton';
 import { Button } from '@/components/ui/button';
+import { prisma } from '@/lib/prisma';
 import { BarChart4, PlusSquare, Star } from 'lucide-react';
 import { Metadata } from 'next';
 import { getServerSession } from 'next-auth';
@@ -18,6 +19,13 @@ interface Props {
 export default async function fetchMovieByID({ params }: Props) {
 
     const session = await getServerSession(authOptions); 
+    const currentUserEmail = session?.user?.email!; 
+     const currentUser = await prisma.user.findUnique({     
+      where: {
+        email: currentUserEmail,
+      },
+    });
+
 
     const url = `https://api.themoviedb.org/3/movie/${params.id}?language=en-US`;
     const options = {
@@ -35,6 +43,11 @@ export default async function fetchMovieByID({ params }: Props) {
 
         const hours = Math.floor(result.runtime / 60);
         const minutes = result.runtime % 60;
+
+        var isInWatclist = false
+        if(currentUser?.watchList.includes(result.title)){  //check if movie is already in watchlist
+            isInWatclist = true
+        }
 
         return (
             <MaxWidthWrapper>
@@ -87,7 +100,7 @@ export default async function fetchMovieByID({ params }: Props) {
             <div className=''>
             <p className='text-white'>{result.overview}</p>
             </div>  
-               <WatchListButton movieName={result.title} /> 
+               <WatchListButton movieName={result.title} isInWatclist={isInWatclist}/> 
             </div>
             </MaxWidthWrapper>
         )
