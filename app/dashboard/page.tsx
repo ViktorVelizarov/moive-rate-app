@@ -45,8 +45,8 @@ export default async function Page() {
           <div>
           <Dialog>
           <DialogTrigger>
-            <Button className='mt-5'>
-                <p>Edit profile</p>
+            <Button className='mt-5 mr-4'>
+                <p>Edit Profile</p>
             </Button>
           </DialogTrigger>
 
@@ -54,6 +54,13 @@ export default async function Page() {
               <EditProfile />
           </DialogContent>
         </Dialog>
+
+          <Link  href='/watchlist'>
+          <Button className='mt-5'>
+            <p>Your Watchlist</p>
+          </Button>
+          </Link>
+
         </div>
         </div>
           <div>

@@ -80,7 +80,7 @@ export default function () {
 
           <div className='hidden items-center space-x-4 sm:flex text-white'>
           <Link
-            href='/'
+            href='/watchlist'
             className='flex z-40 font-semibold'>
             <BookPlus color='white'/>
             <span className='text-white'>Watchlist</span>

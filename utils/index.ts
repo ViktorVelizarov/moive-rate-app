@@ -5,24 +5,6 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 
-export async function addToWishlist(){
-    const session = await getServerSession(authOptions); 
-    if (!session) {      //if no session then redirect 
-        redirect('/api/auth/signin');
-       }
-      const currentUserEmail = session?.user?.email!;   //get logged user email
-
-
-    const user = await prisma.user.update({
-        where: {  //which user to update
-            email: currentUserEmail,
-        },
-        data: {
-          watchList: "test", 
-        },
-    })
-}
-
 
 export async function fetchRated() {
     const url = 'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1';

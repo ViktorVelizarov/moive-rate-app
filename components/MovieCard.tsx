@@ -14,7 +14,18 @@ import {
 
 export default function UpcomingMovCard(props: {id: string, rating: number, title: string, poster: string }) {
   const [starColor, SetStarColor] = React.useState(["gray", "gray" , "gray", "gray", "gray", "gray", "gray", "gray", "gray" , "gray"])
- 
+  
+  async function addToWatch() {
+    const res = await fetch('/api/wishlist', {   //we send the collected info to a api endpoint
+      method: 'PUT',
+      body: JSON.stringify(props.title),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    await res.json();
+  }
+
   const starArray = starColor.map((color, index) => (
     <Star
       key={index}
@@ -60,7 +71,8 @@ export default function UpcomingMovCard(props: {id: string, rating: number, titl
             <h2 className='text-white text-left ml-3'>{props.title}</h2>
             </div>
             <div className='flex flex-col items-center mb-5'>
-              <button className='flex flex-row items-center bg-slate-700 px-6 py-2 rounded-md hover:bg-slate-600'><Plus color="#0c8ff2"/><p className='text-blueImport'>Watchlist</p></button>
+              <button  onClick={addToWatch} className='flex flex-row items-center bg-slate-700 px-6 py-2 rounded-md hover:bg-slate-600'><Plus color="#0c8ff2"/>
+              <p className='text-blueImport'>Watchlist</p></button>
             </div>
           </div>
       </div>

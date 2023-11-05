@@ -10,7 +10,6 @@ interface Props {
 export default function WatchListButton({ movieName }: Props ) {
 
   async function addToWatch() {
-   console.log(movieName)
     const res = await fetch('/api/wishlist', {   //we send the collected info to a api endpoint
       method: 'PUT',
       body: JSON.stringify(movieName),
@@ -18,9 +17,7 @@ export default function WatchListButton({ movieName }: Props ) {
         'Content-Type': 'application/json',
       },
     });
-    
     await res.json();
-    
   }
 
   return (
