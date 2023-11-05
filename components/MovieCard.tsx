@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronRightCircle, Link, Plus, Star } from 'lucide-react'
+import { CheckCheck, ChevronRightCircle, Link, Plus, Star } from 'lucide-react'
 import React from 'react'
 import { Button } from './ui/button'
 import {
@@ -12,10 +12,25 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 
-export default function UpcomingMovCard(props: {id: string, rating: number, title: string, poster: string }) {
+export default function UpcomingMovCard(props: {id: string, rating: number, title: string, poster: string}) {
   const [starColor, SetStarColor] = React.useState(["gray", "gray" , "gray", "gray", "gray", "gray", "gray", "gray", "gray" , "gray"])
-  
+  const [watchlsitState, SetWatchlsitState] = React.useState(false)
+
+  async function checkWishlist() {  //check if the movie is already in watchlist
+    const res = await fetch('/api/checkWishlist', { 
+      method: 'PUT',
+      body: JSON.stringify(props.title),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const result = await res.json();
+    SetWatchlsitState(result)
+  }
+  checkWishlist()
+
   async function addToWatch() {
+    SetWatchlsitState(true)
     const res = await fetch('/api/wishlist', {   //we send the collected info to a api endpoint
       method: 'PUT',
       body: JSON.stringify(props.title),
@@ -71,8 +86,13 @@ export default function UpcomingMovCard(props: {id: string, rating: number, titl
             <h2 className='text-white text-left ml-3'>{props.title}</h2>
             </div>
             <div className='flex flex-col items-center mb-5'>
-              <button  onClick={addToWatch} className='flex flex-row items-center bg-slate-700 px-6 py-2 rounded-md hover:bg-slate-600'><Plus color="#0c8ff2"/>
+            {watchlsitState ? (
+              <button disabled className='flex flex-row items-center bg-slate-700 px-6 py-2 rounded-md border-yellowImport border-2'><CheckCheck color="#facd05"/>
+              <p className='text-blueImport'>In Watchlist</p></button>
+            ) : (
+              <button  onClick={addToWatch} className='flex flex-row items-center bg-slate-700 px-9 py-2 rounded-md hover:bg-slate-600'><Plus color="#0c8ff2"/>
               <p className='text-blueImport'>Watchlist</p></button>
+            )}
             </div>
           </div>
       </div>

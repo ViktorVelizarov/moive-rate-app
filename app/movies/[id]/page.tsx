@@ -17,7 +17,7 @@ interface Props {
 
 
 export default async function fetchMovieByID({ params }: Props) {
-
+    
     const session = await getServerSession(authOptions); 
     const currentUserEmail = session?.user?.email!; 
      const currentUser = await prisma.user.findUnique({     

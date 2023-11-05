@@ -23,8 +23,11 @@ export default function WatchListButton({ movieName, isInWatclist }: Props ) {
         'Content-Type': 'application/json',
       },
     });
-    await res.json();
+    const data = await res.json();
+      console.log("res")
+      console.log(data )
   }
+  
 
   return (
     <div>

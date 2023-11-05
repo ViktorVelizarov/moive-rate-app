@@ -45,7 +45,7 @@ export default function TopRatedDiv({isDataEmpty, topRatedMovies} : any) {
             <div className='flex flex-row gap-3'>
               {topRatedMovies.results?.slice(startingIndex, endingIndex).map((upcomingMovie: {id: string,  vote_average: number, title: string,poster_path: string, backdrop_path: string; } ) => (
                 
-                <MovieCard title={upcomingMovie.title} poster={upcomingMovie.poster_path} id={upcomingMovie.id} rating={upcomingMovie.vote_average}/>
+                <MovieCard key={upcomingMovie.id}  title={upcomingMovie.title} poster={upcomingMovie.poster_path} id={upcomingMovie.id} rating={upcomingMovie.vote_average}/>
               ))}
             </div>
           </section>

@@ -9,7 +9,6 @@ import PlayingMoviesDiv from './PlayingMoviesDiv';
 
 export default async function playingMovies() {
     const playingMovies = await fetchPlaying();
-    console.log(playingMovies)
 
     const isDataEmpty = !Array.isArray(playingMovies.results) || playingMovies.results.length < 1 || !playingMovies.results;
   return (  

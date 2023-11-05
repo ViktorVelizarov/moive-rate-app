@@ -9,7 +9,7 @@ import UpcomingMoviesDiv from './UpcomingMoviesDiv';
 
 export default async function UpcomingMovies() {
     const upcomingMovies = await fetchPopular();
-    console.log(upcomingMovies)
+    
 
     const isDataEmpty = !Array.isArray(upcomingMovies.results) || upcomingMovies.results.length < 1 || !upcomingMovies.results;
   return (  
