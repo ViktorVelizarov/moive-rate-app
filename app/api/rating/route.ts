@@ -23,8 +23,8 @@ export async function PUT(req: Request) {
         console.log("test2");
         const newRating = await prisma.rating.create({
             data: {
-                movie_id: data.toString(),
-                rating: "10",    
+                movie_id: data.movie_id.toString(),
+                rating: data.rating.toString(),    
                 user: {
                     connect: { id: currentUser?.id }
                 }

@@ -15,6 +15,7 @@ import {
 export default function UpcomingMovCard(props: {id: string, rating: number, title: string, poster: string}) {
   const [starColor, SetStarColor] = React.useState(["gray", "gray" , "gray", "gray", "gray", "gray", "gray", "gray", "gray" , "gray"])
   const [watchlsitState, SetWatchlsitState] = React.useState(false)
+  const [userRating, SetUserRating] = React.useState(0)
 
   async function checkWishlist() {  //check if the movie is already in watchlist
     const res = await fetch('api/checkWishlist', { 
@@ -27,7 +28,20 @@ export default function UpcomingMovCard(props: {id: string, rating: number, titl
     const result = await res.json();
     SetWatchlsitState(result)
   }
-  
+  checkWishlist()
+
+  async function checkRating() {  //check if the movie has been rated by the current user
+    const res = await fetch('api/checkRating', { 
+      method: 'PUT',
+      body: JSON.stringify(props.id),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const result = await res.json();
+    SetUserRating(result)
+  }
+  checkRating()
 
   async function addToWatch() {
     SetWatchlsitState(true)
@@ -56,10 +70,15 @@ export default function UpcomingMovCard(props: {id: string, rating: number, titl
   ));
 
   async function createRating(){
-    console.log("test1")
+    const sentData = {  
+      movie_id: props.id,
+      rating: starColor.filter(color => color != "gray").length,
+    }
+    console.log("rating")
+    console.log(sentData.rating)
       const res = await fetch('/api/rating', {
         method: 'PUT',
-        body: JSON.stringify(props.id),
+        body: JSON.stringify(sentData),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -81,7 +100,19 @@ export default function UpcomingMovCard(props: {id: string, rating: number, titl
             <Star color='#facd05' fill='#facd05'/>
             <p className='text-white '> {props.rating.toFixed(1)} </p>
               <Dialog>
-                <DialogTrigger><Star color='#0c8ff2' /></DialogTrigger>
+                <DialogTrigger>
+                    {userRating === 0 ? (
+                      <div className='flex flex-row'>
+                        <Star color='#0c8ff2' />
+                      </div>
+                     ) : (
+                      <div className='flex flex-row'>
+                        <Star color='#0c8ff2' fill='#0c8ff2'/>
+                        <p className='text-white '> {userRating} </p>
+                      </div>
+                     )}
+                      
+                  </DialogTrigger>
                 <DialogContent className='bg-slate-700'>
                 <form  onSubmit={createRating}>
                     <div className='flex flex-col items-center'>
