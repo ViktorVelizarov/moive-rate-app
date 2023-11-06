@@ -17,7 +17,7 @@ export default function UpcomingMovCard(props: {id: string, rating: number, titl
   const [watchlsitState, SetWatchlsitState] = React.useState(false)
 
   async function checkWishlist() {  //check if the movie is already in watchlist
-    const res = await fetch('/api/checkWishlist', { 
+    const res = await fetch('api/checkWishlist', { 
       method: 'PUT',
       body: JSON.stringify(props.title),
       headers: {
@@ -27,7 +27,7 @@ export default function UpcomingMovCard(props: {id: string, rating: number, titl
     const result = await res.json();
     SetWatchlsitState(result)
   }
-  checkWishlist()
+  
 
   async function addToWatch() {
     SetWatchlsitState(true)
@@ -54,6 +54,20 @@ export default function UpcomingMovCard(props: {id: string, rating: number, titl
       }}
     />
   ));
+
+  async function createRating(){
+    console.log("test1")
+      const res = await fetch('/api/rating', {
+        method: 'PUT',
+        body: JSON.stringify(props.id),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      await res.json();
+  }
+
   return (
     <>
 
@@ -69,16 +83,18 @@ export default function UpcomingMovCard(props: {id: string, rating: number, titl
               <Dialog>
                 <DialogTrigger><Star color='#0c8ff2' /></DialogTrigger>
                 <DialogContent className='bg-slate-700'>
-                  <div className='flex flex-col items-center'>
-                  <p className='text-yellowImport'> Your rating for:</p>
-                  <h1 className='text-white text-2xl font-semibold'>{props.title}</h1>
+                <form  onSubmit={createRating}>
+                    <div className='flex flex-col items-center'>
+                    <p className='text-yellowImport'> Your rating for:</p>
+                    <h1 className='text-white text-2xl font-semibold'>{props.title}</h1>
 
-                  <div className='flex flex-row gap-1 mt-4'>
-                  {starArray.map((element, index) => (
-                  <div key={index}>{element}</div>))}
-                  </div>
-                  <Button className='w-64 mt-6'>Rate</Button>
-                  </div>
+                    <div className='flex flex-row gap-1 mt-4'>
+                    {starArray.map((element, index) => (
+                    <div key={index}>{element}</div>))}
+                    </div>
+                    <Button  type="submit" className='w-64 mt-6'>Rate</Button>
+                    </div>
+                </form>
                 </DialogContent>
               </Dialog>
             </div>

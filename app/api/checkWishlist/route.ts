@@ -18,7 +18,6 @@ export async function PUT(req: Request) {  //check if
       });
 
     if(currentUser?.watchList.includes(movieTitle)){
-        console.log("already in watclist")
         return NextResponse.json(true)
     }
     else{

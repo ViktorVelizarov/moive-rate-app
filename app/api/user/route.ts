@@ -3,11 +3,12 @@
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
+import { authOptions } from "../auth/[...nextauth]/route";
 
 
 export async function PUT(req: Request) {  //When updating a DB we use PUT
 
-    const session = await getServerSession(); //getting the current session
+    const session = await getServerSession(authOptions);//getting the current session
     const currentUserEmail = session?.user?.email!;  //getting current user email on the
                                                     //server cause if we get it on the client it can be hacked\
 

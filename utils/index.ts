@@ -19,7 +19,6 @@ export async function fetchRated() {
     try {
         const response = await fetch(url, options);
         const result = await response.json();
-        console.log(result)
         return result
     } catch (error) {
         console.error(error);
@@ -39,7 +38,6 @@ export async function fetchPlaying() {
     try {
         const response = await fetch(url, options);
         const result = await response.json();
-        console.log(result)
         return result
     } catch (error) {
         console.error(error);
@@ -59,7 +57,6 @@ export async function fetchPopular() {
     try {
         const response = await fetch(url, options);
         const result = await response.json();
-        console.log(result)
         return result
     } catch (error) {
         console.error(error);

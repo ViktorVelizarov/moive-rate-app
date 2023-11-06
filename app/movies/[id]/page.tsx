@@ -39,7 +39,6 @@ export default async function fetchMovieByID({ params }: Props) {
     try {
         const response = await fetch(url, options);
         const result = await response.json();
-        console.log(result)
 
         const hours = Math.floor(result.runtime / 60);
         const minutes = result.runtime % 60;
