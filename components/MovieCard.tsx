@@ -16,7 +16,7 @@ export default function UpcomingMovCard(props: {id: string, rating: number, titl
   const [starColor, SetStarColor] = React.useState(["gray", "gray" , "gray", "gray", "gray", "gray", "gray", "gray", "gray" , "gray"])
   const [watchlsitState, SetWatchlsitState] = React.useState(false)
   const [userRating, SetUserRating] = React.useState(0)
-
+  console.log(props.poster)
   async function checkWishlist() {  //check if the movie is already in watchlist
     const res = await fetch('api/checkWishlist', { 
       method: 'PUT',
@@ -94,7 +94,7 @@ export default function UpcomingMovCard(props: {id: string, rating: number, titl
         
           <div className=''>
           <a href={`/movies/${props.id}`}>
-            <img src={`https://dlv.nyc3.cdn.digitaloceanspaces.com/images/${props.poster}`} width="190px" height="800px"/>
+            <img src={`https://dlv.nyc3.cdn.digitaloceanspaces.com/images${props.poster}`} width="190px" height="800px"/>
           </a>
             <div className='flex flex-row p-3 '>
             <Star color='#facd05' fill='#facd05'/>

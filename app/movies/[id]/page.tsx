@@ -1,4 +1,3 @@
-
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import WatchListButton from '@/components/WatchListButton';

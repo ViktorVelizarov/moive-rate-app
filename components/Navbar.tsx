@@ -66,10 +66,10 @@ export default function () {
           </Link>
 
           <Link
-            href='/'
+            href='/ratings'
             className='flex z-40 font-semibold'>
             <Menu color='white'/>
-            <span className='text-white'>Menu</span>
+            <span className='text-white'>Ratings</span>
           </Link>
       </div>
 
@@ -82,7 +82,7 @@ export default function () {
           <Link
             href='/watchlist'
             className='flex z-40 font-semibold'>
-            <BookPlus color='white'/>
+            <BookPlus color='white'/>   
             <span className='text-white'>Watchlist</span>
           </Link>
           
