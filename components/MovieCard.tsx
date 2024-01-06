@@ -89,7 +89,7 @@ export default function UpcomingMovCard(props: {id: string, rating: number, titl
 
   return (
     <>
-
+  
       <div className='bg-gray-800 w-44 flex flex-row justify-center '>
         
           <div className=''>

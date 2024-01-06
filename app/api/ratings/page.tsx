@@ -30,9 +30,9 @@ export default async function page() {
         </div>
 
         <div className='mt-5'>
-            {user?.ratings.map((item) => (
-              <p> {item}</p>
-            ))}
+           {/* {user?.ratings.map((item) => (
+             <p> {item}</p>
+             ))} */}
         </div>
       </div>
     </MaxWidthWrapper>
