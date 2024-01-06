@@ -18,7 +18,7 @@ export default function UpcomingMovCard(props: {id: string, rating: number, titl
   const [userRating, SetUserRating] = React.useState(0)
   console.log(props.poster)
   async function checkWishlist() {  //check if the movie is already in watchlist
-    const res = await fetch('api/checkWishlist', { 
+    const res = await fetch('/api/checkWishlist', { 
       method: 'PUT',
       body: JSON.stringify(props.title),
       headers: {
@@ -31,7 +31,7 @@ export default function UpcomingMovCard(props: {id: string, rating: number, titl
   checkWishlist()
 
   async function checkRating() {  //check if the movie has been rated by the current user
-    const res = await fetch('api/checkRating', { 
+    const res = await fetch('/api/checkRating', { 
       method: 'PUT',
       body: JSON.stringify(props.id),
       headers: {
