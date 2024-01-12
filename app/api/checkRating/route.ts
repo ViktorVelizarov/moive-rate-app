@@ -1,4 +1,3 @@
-
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { prisma } from '@/lib/prisma';
@@ -29,5 +28,5 @@ export async function PUT(req: Request) {  //check if
     else{
         return NextResponse.json(0)
     }
-    
+
 }

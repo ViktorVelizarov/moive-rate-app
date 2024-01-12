@@ -16,14 +16,13 @@ export default function UpcomingMovCard(props: {id: string, rating: number, titl
   const [starColor, SetStarColor] = React.useState(["gray", "gray" , "gray", "gray", "gray", "gray", "gray", "gray", "gray" , "gray"])
   const [watchlsitState, SetWatchlsitState] = React.useState(false)
   const [userRating, SetUserRating] = React.useState(0)
-  console.log(props.poster)
   
   React.useEffect(() => {
     async function checkWishlist() {
       try {
         const res = await fetch('/api/checkWishlist', {
           method: 'PUT',
-          body: JSON.stringify(props.title),
+          body: JSON.stringify(props.id.toString()),
           headers: {
             'Content-Type': 'application/json',
           },
@@ -39,19 +38,32 @@ export default function UpcomingMovCard(props: {id: string, rating: number, titl
     checkWishlist();
   }, [props.title]);
   
-
-  
-
-  async function addToWatch() {
-    SetWatchlsitState(true)
-    const res = await fetch('/api/wishlist', {   //we send the collected info to a api endpoint
+  React.useEffect(() => {
+  async function checkRating() {  //check if the movie has been rated by the current user
+    const res = await fetch('api/checkRating', { 
       method: 'PUT',
-      body: JSON.stringify(props.title),
+      body: JSON.stringify(props.id),
       headers: {
         'Content-Type': 'application/json',
       },
     });
-    await res.json();
+    const result = await res.json();
+    SetUserRating(result)
+  }
+  checkRating()
+  }, [props.title]);
+
+  
+  async function addToWatch() {
+    SetWatchlsitState(true)
+    const res = await fetch('/api/wishlist', {   //we send the collected info to a api endpoint
+      method: 'PUT',
+      body: JSON.stringify(props.id.toString()),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await res.json();
   }
 
   const starArray = starColor.map((color, index) => (
@@ -100,7 +112,7 @@ export default function UpcomingMovCard(props: {id: string, rating: number, titl
             <p className='text-white '> {props.rating.toFixed(1)} </p>
               <Dialog>
                 <DialogTrigger>
-                    {userRating === 0 ? (
+                {userRating === 0 ? (
                       <div className='flex flex-row'>
                         <Star color='#0c8ff2' />
                       </div>
@@ -110,7 +122,7 @@ export default function UpcomingMovCard(props: {id: string, rating: number, titl
                         <p className='text-white '> {userRating} </p>
                       </div>
                      )}
-                      
+
                   </DialogTrigger>
                 <DialogContent className='bg-slate-700'>
                 <form  onSubmit={createRating}>

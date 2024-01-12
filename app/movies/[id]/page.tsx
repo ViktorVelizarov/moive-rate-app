@@ -43,7 +43,7 @@ export default async function fetchMovieByID({ params }: Props) {
         const minutes = result.runtime % 60;
 
         var isInWatclist = false
-        if(currentUser?.watchList.includes(result.title)){  //check if movie is already in watchlist
+        if(currentUser?.watchList.includes(result.id.toString())){  //check if movie is already in watchlist
             isInWatclist = true
         }
 
@@ -83,9 +83,8 @@ export default async function fetchMovieByID({ params }: Props) {
             </div>
 
             <div className='w-64 mt-8'>
-            <img src={`https://dlv.nyc3.cdn.digitaloceanspaces.com/images/${result.poster_path}`}/>
+            <img src={`https://dlv.nyc3.cdn.digitaloceanspaces.com/images${result.poster_path}`}/>
             </div>
-            
             <div className='flex flex-row mt-4'>
             {result.genres.map((genre : any) => (
                 <Button variant={'default'} className='mr-3'>
@@ -98,7 +97,7 @@ export default async function fetchMovieByID({ params }: Props) {
             <div className=''>
             <p className='text-white'>{result.overview}</p>
             </div>  
-               <WatchListButton movieName={result.title} isInWatclist={isInWatclist}/> 
+               <WatchListButton movieId = {result.id.toString()} isInWatclist={isInWatclist}/> 
             </div>
             </MaxWidthWrapper>
         )

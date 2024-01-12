@@ -7,18 +7,18 @@ import { getServerSession } from 'next-auth';
 import React from 'react';
 
 interface Props {
-  movieName: string; 
+  movieId: string; 
   isInWatclist : boolean
 }
 
-export default function WatchListButton({ movieName, isInWatclist }: Props ) {
+export default function WatchListButton({ movieId, isInWatclist }: Props ) {
 
   const [watchlsitState, SetWatchlsitState] = React.useState(isInWatclist)
   async function addToWatch() {
     SetWatchlsitState(true)
     const res = await fetch('/api/wishlist', {   //we send the collected info to a api endpoint
       method: 'PUT',
-      body: JSON.stringify(movieName),
+      body: JSON.stringify(movieId),
       headers: {
         'Content-Type': 'application/json',
       },
