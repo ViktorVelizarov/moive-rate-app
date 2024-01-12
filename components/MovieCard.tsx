@@ -17,31 +17,30 @@ export default function UpcomingMovCard(props: {id: string, rating: number, titl
   const [watchlsitState, SetWatchlsitState] = React.useState(false)
   const [userRating, SetUserRating] = React.useState(0)
   console.log(props.poster)
-  async function checkWishlist() {  //check if the movie is already in watchlist
-    const res = await fetch('/api/checkWishlist', { 
-      method: 'PUT',
-      body: JSON.stringify(props.title),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    const result = await res.json();
-    SetWatchlsitState(result)
-  }
-  checkWishlist()
+  
+  React.useEffect(() => {
+    async function checkWishlist() {
+      try {
+        const res = await fetch('/api/checkWishlist', {
+          method: 'PUT',
+          body: JSON.stringify(props.title),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+  
+        const result = await res.json();
+        SetWatchlsitState(result);
+      } catch (error) {
+        console.error('Error checking wishlist:', error);
+      }
+    }
+  
+    checkWishlist();
+  }, [props.title]);
+  
 
-  async function checkRating() {  //check if the movie has been rated by the current user
-    const res = await fetch('/api/checkRating', { 
-      method: 'PUT',
-      body: JSON.stringify(props.id),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    const result = await res.json();
-    SetUserRating(result)
-  }
-  checkRating()
+  
 
   async function addToWatch() {
     SetWatchlsitState(true)
