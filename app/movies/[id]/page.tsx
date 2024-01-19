@@ -1,3 +1,4 @@
+
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import WatchListButton from '@/components/WatchListButton';
@@ -7,6 +8,7 @@ import { BarChart4, PlusSquare, Star } from 'lucide-react';
 import { Metadata } from 'next';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
+import React from 'react'
 
 interface Props {
     params: {
@@ -15,9 +17,26 @@ interface Props {
   }
 
 
+  async function checkRating(id: string) {  //check if the movie has been rated by the current user
+    const res = await fetch('/api/checkRating', { 
+      method: 'PUT',
+      body: JSON.stringify(968051),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const result = await res.json();
+    const integerValue = parseInt(result, 10);
+    return integerValue ;
+  }
+
 export default async function fetchMovieByID({ params }: Props) {
-    
+
     const session = await getServerSession(authOptions); 
+
+  if (!session) {      //if no session then redirect 
+    redirect('/api/auth/signin');
+  }
     const currentUserEmail = session?.user?.email!; 
      const currentUser = await prisma.user.findUnique({     
       where: {
@@ -43,7 +62,7 @@ export default async function fetchMovieByID({ params }: Props) {
         const minutes = result.runtime % 60;
 
         var isInWatclist = false
-        if(currentUser?.watchList.includes(result.id.toString())){  //check if movie is already in watchlist
+        if(currentUser?.watchList.includes(result.id.toString)){  //check if movie is already in watchlist
             isInWatclist = true
         }
 
@@ -72,7 +91,11 @@ export default async function fetchMovieByID({ params }: Props) {
                         </Button>
                         <Button  variant={'ghost'}>
                         <Star color='#0c8ff2'/>
+                        {await checkRating(result.id) == 0 ? (
                             <span className='text-blueImport'>Rate</span>
+                            ) : (
+                            <p>{await checkRating(result.id)} / 10</p>
+                            )}
                         </Button>
                         <Button  variant={'ghost'}>
                         <BarChart4 color='green'/>

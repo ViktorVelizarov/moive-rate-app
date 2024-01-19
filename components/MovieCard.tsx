@@ -40,7 +40,7 @@ export default function UpcomingMovCard(props: {id: string, rating: number, titl
   
   React.useEffect(() => {
   async function checkRating() {  //check if the movie has been rated by the current user
-    const res = await fetch('api/checkRating', { 
+    const res = await fetch('/api/checkRating', { 
       method: 'PUT',
       body: JSON.stringify(props.id),
       headers: {

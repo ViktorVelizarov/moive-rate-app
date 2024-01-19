@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth';
 import React from 'react'
 import { redirect } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
-import { authOptions } from '../auth/[...nextauth]/route';
+import { authOptions } from '../api/auth/[...nextauth]/route';
 
 export default async function page() {
 
