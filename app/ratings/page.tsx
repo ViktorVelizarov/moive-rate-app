@@ -19,6 +19,11 @@ export default async function page() {
         email: currentUserEmail,
       },
     });
+    const userRatings = await prisma.rating.findMany({
+      where: {
+        userId: user?.id,
+      },
+    });
 
   return (
     <div className='text-white'>
@@ -30,9 +35,12 @@ export default async function page() {
         </div>
 
         <div className='mt-5'>
-           {/* {user?.ratings.map((item) => (
-             <p> {item}</p>
-             ))} */}
+        {userRatings.map((item) =>  (
+          <>
+             <p> {item.movie_id}</p>
+             <p> {item.rating}</p>
+             </>
+             ))} 
         </div>
       </div>
     </MaxWidthWrapper>

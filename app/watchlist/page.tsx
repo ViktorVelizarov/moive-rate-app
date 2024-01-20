@@ -5,7 +5,7 @@ import { authOptions } from '../api/auth/[...nextauth]/route';
 import { redirect } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 
-async function getMovieTitle(movieId : string){
+async function getMovie(movieId : string){
   const url = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`;
   const options = {
   method: 'GET',
@@ -18,7 +18,7 @@ async function getMovieTitle(movieId : string){
   try {
       const response = await fetch(url, options);
       const result = await response.json();
-      return result.title;
+      return result;
     } catch (error) {
       return null;
   }
@@ -72,8 +72,12 @@ export default async function page() {
       // Use Promise.all to await all promises concurrently
       Promise.all(user.watchList.map(async (item) => (
         <>
-          <p>{await getMovieTitle(item)}</p>
-          <img src={await getMovieImage(item)} width="160px" height="300px" alt="Movie Image" />
+          <div className='flex flex-row mb-7 bg-slate-600'>
+          
+          <img src={await getMovieImage(item)} width="140px" height="220  px" alt="Movie Image" className='mr-4'/>
+          <h1 className='font-medium text-lg'>{(await getMovie(item)).title}</h1>
+          <p> {(await getMovie(item)).release_date}</p>
+          </div>
         </>
       )))
     ) : (
