@@ -72,12 +72,22 @@ export default async function page() {
       // Use Promise.all to await all promises concurrently
       Promise.all(user.watchList.map(async (item) => (
         <>
-          <div className='flex flex-row mb-7 bg-slate-600'>
-          
+         <a href={`/movies/${(await getMovie(item)).id}`}>
+          <div className='flex flex-row mb-7 bg-slate-600 m-3'>
+         
           <img src={await getMovieImage(item)} width="140px" height="220  px" alt="Movie Image" className='mr-4'/>
-          <h1 className='font-medium text-lg'>{(await getMovie(item)).title}</h1>
-          <p> {(await getMovie(item)).release_date}</p>
-          </div>
+          <div className='flex flex-col m-4'>
+            <h1 className='font-medium text-xl'>{(await getMovie(item)).title}</h1>
+              <div className='flex flex-row gap-4 text-gray-300 text-sm'>
+                <p> {(await getMovie(item)).release_date}  </p>
+                <p> {(await getMovie(item)).adult ? "PG-18" : "PG-13"}</p>
+                <p> {`${Math.floor((await getMovie(item)).runtime / 60)}h${(await getMovie(item)).runtime % 60}m`}</p>
+              </div>
+              <p className='mt-4'>  {(await getMovie(item)).overview}  </p>
+            </div>
+            
+          </div>  
+          </a>
         </>
       )))
     ) : (

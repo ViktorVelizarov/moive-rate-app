@@ -1,4 +1,3 @@
-
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import WatchListButton from '@/components/WatchListButton';
@@ -9,18 +8,16 @@ import { Metadata } from 'next';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import React from 'react'
-
 interface Props {
     params: {
       id: string;
     };
   }
 
-
   async function checkRating(id: string) {  //check if the movie has been rated by the current user
-    const res = await fetch('/api/checkRating', { 
+    const res = await fetch(`/api/checkRating`, {
       method: 'PUT',
-      body: JSON.stringify(968051),
+      body: JSON.stringify(id),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -31,20 +28,18 @@ interface Props {
   }
 
 export default async function fetchMovieByID({ params }: Props) {
-
+    
     const session = await getServerSession(authOptions); 
 
-  if (!session) {      //if no session then redirect 
-    redirect('/api/auth/signin');
-  }
+    if (!session) {      //if no session then redirect 
+      redirect('/api/auth/signin');
+    }
     const currentUserEmail = session?.user?.email!; 
      const currentUser = await prisma.user.findUnique({     
       where: {
         email: currentUserEmail,
       },
     });
-
-
     const url = `https://api.themoviedb.org/3/movie/${params.id}?language=en-US`;
     const options = {
     method: 'GET',
@@ -53,16 +48,14 @@ export default async function fetchMovieByID({ params }: Props) {
         Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlNDA5OTMyY2FhZTMxYTBiZDYzNTliNjFkNDQ3NDEyZSIsInN1YiI6IjY1MzBlZjE2MzBmNzljMDEzODBlYTg5NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S37uuIacu0SYc6FOkf7_SJYZ3iH1vyasnC46xrSel8o'
     }
     };
-
     try {
         const response = await fetch(url, options);
         const result = await response.json();
-
         const hours = Math.floor(result.runtime / 60);
         const minutes = result.runtime % 60;
 
         var isInWatclist = false
-        if(currentUser?.watchList.includes(result.id.toString)){  //check if movie is already in watchlist
+        if(currentUser?.watchList.includes(result.id.toString())){  //check if movie is already in watchlist
             isInWatclist = true
         }
 
@@ -77,7 +70,6 @@ export default async function fetchMovieByID({ params }: Props) {
                         <p>{`${hours}h${minutes}m`}</p>
                     </div>
                 </div>
-
                 <div className='flex flex-col'>
                     <div className='flex flex-row gap-5 text-gray-500'>
                         <p>Movie Rating</p>
@@ -91,11 +83,7 @@ export default async function fetchMovieByID({ params }: Props) {
                         </Button>
                         <Button  variant={'ghost'}>
                         <Star color='#0c8ff2'/>
-                        {await checkRating(result.id) == 0 ? (
-                            <span className='text-blueImport'>Rate</span>
-                            ) : (
-                            <p>{await checkRating(result.id)} / 10</p>
-                            )}
+                       
                         </Button>
                         <Button  variant={'ghost'}>
                         <BarChart4 color='green'/>
@@ -104,7 +92,6 @@ export default async function fetchMovieByID({ params }: Props) {
                     </div>
                 </div>
             </div>
-
             <div className='w-64 mt-8'>
             <img src={`https://dlv.nyc3.cdn.digitaloceanspaces.com/images${result.poster_path}`}/>
             </div>
