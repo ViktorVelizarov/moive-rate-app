@@ -60,17 +60,8 @@ export default async function Page() {
             <p>Your Watchlist</p>
           </Button>
           </Link>
-
         </div>
         </div>
-          <div>
-            <div className='flex flex-row mb-5'>
-            <h1 className='text-white font-semibold text-xl'><span className='text-yellowImport'>|</span> Your Watchlist:</h1>
-            </div>
-            <p>{user?.watchList}</p>
-            <p>2</p>
-            <p>3</p>
-          </div>
       </div>
       
     </MaxWidthWrapper>
